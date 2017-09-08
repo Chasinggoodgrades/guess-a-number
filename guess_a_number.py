@@ -20,3 +20,5 @@ while guess != rand:
         print("You got it!")
 
 print("Game over")
+
+#Making Changes
