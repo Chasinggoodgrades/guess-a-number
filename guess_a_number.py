@@ -2,14 +2,21 @@ import random
 
 # config
 low = 1
-high = 10
-limit = 4
+high = 100
+import math
+limit = math.log(high, 2)
 
 # helper functions
 def show_start_screen():
-    print("**************************")
-    print("**** Guess a Number ! ****")
-    print("**************************")
+    print("┊┊┊┊┊┊┊╱▏┊┊┊┊┊┊")
+    print("┊┊┊┊┊┊▕╱┊┊┊┊┊┊┊")
+    print("┊┊┊╱▔▔╲┊╱▔▔╲┊┊┊")
+    print("┊┊▕┈┈┈┈▔┈┈┈╱┊┊┊")
+    print("┊┊▕┈┈┈┈┈┈┈┈╲┊┊┊")
+    print("┊┊┊╲┈┈┈┈┈┈┈╱┊┊┊")
+    print("┊┊┊┊╲▂▂▂▂▂╱┊┊┊┊")
+    print()
+    print("You have " + str(limit) + " attempts!")
 
 def show_credits():
     print("This awesome game was created by Coop Dogg.")
