@@ -4,7 +4,7 @@ import random
 low = 1
 high = 100
 import math
-limit = math.log(high, 2)
+limit = math.ceil(math.log(high, 2))
 
 # helper functions
 def show_start_screen():
@@ -16,14 +16,15 @@ def show_start_screen():
     print("┊┊┊╲┈┈┈┈┈┈┈╱┊┊┊")
     print("┊┊┊┊╲▂▂▂▂▂╱┊┊┊┊")
     print()
-    print("You have " + str(limit) + " attempts!")
+    
 
 def show_credits():
-    print("This awesome game was created by Coop Dogg.")
-    
+    print("###################################################")
+    print("This game was edited and perfected by yo boy Chase.")
+    print("###################################################")    
 def get_guess():
     while True:
-        guess = input("Guess a number: ")
+        guess = input("###Guess a number###: ")
 
         if guess.isnumeric():
             guess = int(guess)
@@ -32,15 +33,18 @@ def get_guess():
             print("You must enter a number.")
 
 def pick_number():
-    print("I'm thinking of a number from " + str(low) + " to " + str(high) +".")
-
+    print()
+    print("I'm thinking of a number from " + str(low) + " to " + str(high) + ".")
+    print()
+    print("You have " + str(limit) + " attempts!")
+    
     return random.randint(low, high)
 
 def check_guess(guess, rand):
     if guess < rand:
-        print("You guessed too low.")
+        print("You guessed too LOW.")
     elif guess > rand:
-        print("You guessed too high.")
+        print("You guessed too HIGH.")
 
 def show_result(guess, rand):
     if guess == rand:
@@ -52,9 +56,9 @@ def play_again():
     while True:
         decision = input("Would you like to play again? (y/n) ")
 
-        if decision == 'y' or decision == 'yes':
+        if decision.lower() == 'y' or decision.lower() == 'yes':
             return True
-        elif decision == 'n' or decision == 'no':
+        elif decision.lower() == 'n' or decision.lower() == 'no':
             return False
         else:
             print("I don't understand. Please enter 'y' or 'n'.")
