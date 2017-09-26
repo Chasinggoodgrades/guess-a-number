@@ -1,7 +1,7 @@
 import random
 
 # config
-low = 60
+low = 1
 high = 100
 import math
 limit = math.ceil(math.log(high-low +1, 2))
