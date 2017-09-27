@@ -2,8 +2,10 @@ import random
 
 # config
 low = 1
-high = 1000
-
+high = 100
+current_low = low
+current_high = high
+high_low = (current_high + current_low // 2)
 
 # helper functions
 def show_start_screen():
@@ -15,12 +17,17 @@ def show_credits():
     pass
     
 def get_guess(current_low, current_high):
+    
     """
     Return a truncated average of current low and high.
     """
     pass
 
 def pick_number():
+    print("You should pick a number between " + str(low) + " and " + str(high) + ".")
+    input()
+    print("Is the number.. " + str(high_low) + "?")
+
     """
     Ask the player to think of a number between low and high.
     Then  wait until the player presses enter.
@@ -28,19 +35,33 @@ def pick_number():
     pass
 
 def check_guess(guess):
+    print("Was I high? Low? Or correct?")
+    high_low_correct = input()
+    if high_low_correct == "-1":
+        print("I'll try to go higher")
+        return -1
+    elif high_low_correct == "1":
+        print("I'll try to go lower")
+        return 1
+    elif high_low_correct == "0":
+        print("YAYAYAY!")
+        return 0
+    
+          
+          
     """
     Computer will ask if guess was too high, low, or correct.
 
-    Returns -1 if the guess was too low
+    Returns   -1 if the guess was too low
              0 if the guess was correct
              1 if the guess was too high
     """
 
 def show_result():
-    #if guess == 0:
-    #    print("Computer wins as always.")
-    #else:
-    #    print("This isnt going tohappen anyway.")
+    if guess == 0:
+        print("Computer wins as always.")
+    else:
+        print("This isnt going to happen anyway.")
 
 
     """
@@ -62,6 +83,7 @@ def play_again():
 def play():
     current_low = low
     current_high = high
+    high_low = (current_high + current_low // 2)
     check = -1
     
     pick_number()
