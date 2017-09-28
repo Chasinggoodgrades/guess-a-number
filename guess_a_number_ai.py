@@ -5,7 +5,7 @@ low = 1
 high = 100
 current_low = low
 current_high = high
-high_low = (current_high + current_low // 2)
+guess = (current_low+current_high) // 2
 
 # helper functions
 def show_start_screen():
@@ -17,6 +17,9 @@ def show_credits():
     pass
     
 def get_guess(current_low, current_high):
+
+    guess = (current_high + current_low) //2
+    return guess
     
     """
     Return a truncated average of current low and high.
@@ -25,27 +28,18 @@ def get_guess(current_low, current_high):
 
 def pick_number():
     print("You should pick a number between " + str(low) + " and " + str(high) + ".")
+    print("Press any key when you are ready to play.")
     input()
-    print("Is the number.. " + str(high_low) + "?")
-
-    """
-    Ask the player to think of a number between low and high.
-    Then  wait until the player presses enter.
-    """
-    pass
-
 def check_guess(guess):
-    print("Was I high? Low? Or correct?")
-    high_low_correct = input()
-    if high_low_correct == "-1":
-        print("I'll try to go higher")
-        return -1
-    elif high_low_correct == "1":
-        print("I'll try to go lower")
-        return 1
-    elif high_low_correct == "0":
+    answer = input("Is your number " + str(guess) + "?")
+    if answer in "low":
+        check = -1
+    elif answer in "high":
+        check = 1
+    elif answer in "right":
         print("YAYAYAY!")
-        return 0
+        check = 0
+    return check
     
           
           
@@ -57,11 +51,9 @@ def check_guess(guess):
              1 if the guess was too high
     """
 
-def show_result():
-    if guess == 0:
-        print("Computer wins as always.")
-    else:
-        print("This isnt going to happen anyway.")
+def show_result(guess):
+    print()
+    print("Computer will always win. Sorry lmao")
 
 
     """
@@ -83,7 +75,6 @@ def play_again():
 def play():
     current_low = low
     current_high = high
-    high_low = (current_high + current_low // 2)
     check = -1
     
     pick_number()
@@ -93,13 +84,13 @@ def play():
         check = check_guess(guess)
 
         if check == -1:
+            current_low = guess + 1
             # adjust current_low
-            pass
         elif check == 1:
+            current_high = guess - 1
             # adjust current_high
-            pass
 
-    show_result(guess, rand)
+    show_result(guess)
 
 
 # Game starts running here
@@ -112,6 +103,3 @@ while playing:
     playing = play_again()
 
 show_credits()
-
-
-
