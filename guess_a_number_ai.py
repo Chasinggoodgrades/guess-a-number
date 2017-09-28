@@ -1,81 +1,64 @@
 import random
+##########################
+#Edited and perfected by:#
+#       Chase P          #
+##########################
+
 
 # config
 low = 1
 high = 100
+#############
+
+#Set variables
 current_low = low
 current_high = high
-high_low = (current_high + current_low // 2)
+guess = (current_low+current_high) // 2
 
 # helper functions
 def show_start_screen():
-    print("*************************")
-    print("*  Guess a Number A.I!  *")
-    print("*************************")
+    print("HELLO")
+    
+    
 
 def show_credits():
     pass
     
 def get_guess(current_low, current_high):
-    
-    """
-    Return a truncated average of current low and high.
-    """
-    pass
+
+    guess = (current_high + current_low) //2
+    return guess
 
 def pick_number():
+    print()
     print("You should pick a number between " + str(low) + " and " + str(high) + ".")
+    print("Press any key when you are ready to play.")
     input()
-    print("Is the number.. " + str(high_low) + "?")
-
-    """
-    Ask the player to think of a number between low and high.
-    Then  wait until the player presses enter.
-    """
-    pass
-
 def check_guess(guess):
-    print("Was I high? Low? Or correct?")
-    high_low_correct = input()
-    if high_low_correct == "-1":
-        print("I'll try to go higher")
-        return -1
-    elif high_low_correct == "1":
-        print("I'll try to go lower")
-        return 1
-    elif high_low_correct == "0":
+    answer = input("Is your number " + str(guess) + "?")
+    if answer.lower() == "low" or answer.lower() == "l":
+        check = -1
+    elif answer.lower() == "high" or answer.lower() == "h":
+        check = 1
+    elif answer.lower() == "yes" or answer.lower() == "y":
         print("YAYAYAY!")
-        return 0
-    
-          
-          
-    """
-    Computer will ask if guess was too high, low, or correct.
-
-    Returns   -1 if the guess was too low
-             0 if the guess was correct
-             1 if the guess was too high
-    """
-
-def show_result():
-    if guess == 0:
-        print("Computer wins as always.")
+        check = 0
     else:
-        print("This isnt going to happen anyway.")
+        print("I dont understand, please do (h,l, or y)")
+        check = 2
+    return check
 
-
-    """
-    Says the result of the game. (The computer might always win.)
-    """
-    pass
+def show_result(guess):
+    print()
+    print("Computer will always win. Sorry lmao")
 
 def play_again():
     while True:
         decision = input("Would you like to play again? (y/n) ")
 
-        if decision == 'y' or decision == 'yes':
+        if decision.lower() == 'y' or decision.lower() == 'yes':
             return True
-        elif decision == 'n' or decision == 'no':
+        elif decision.lower() == 'n' or decision.lower() == 'no':
             return False
         else:
             print("I don't understand. Please enter 'y' or 'n'.")
@@ -83,7 +66,6 @@ def play_again():
 def play():
     current_low = low
     current_high = high
-    high_low = (current_high + current_low // 2)
     check = -1
     
     pick_number()
@@ -93,14 +75,13 @@ def play():
         check = check_guess(guess)
 
         if check == -1:
+            current_low = guess + 1
             # adjust current_low
-            pass
         elif check == 1:
+            current_high = guess - 1
             # adjust current_high
-            pass
 
-    show_result(guess, rand)
-
+    show_result(guess)
 
 # Game starts running here
 show_start_screen()
@@ -112,6 +93,3 @@ while playing:
     playing = play_again()
 
 show_credits()
-
-
-
