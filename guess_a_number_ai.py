@@ -1,28 +1,32 @@
-import random
 ##########################
 #Edited and perfected by:#
 #       Chase P          #
 ##########################
+import random
+import time
 
-
-# config
-low = 1
-high = 100
-#############
-
-#Set variables
-current_low = low
-current_high = high
-guess = (current_low+current_high) // 2
 
 # helper functions
 def show_start_screen():
     print("HELLO")
-    
-    
+
+
+def set_low_high():
+    low = int(input("Please pick a low for the computer: "))
+    high = int(input("Please pick a high for the computer: "))
+    return low, high  
 
 def show_credits():
-    pass
+    time.sleep(1)
+    print("########################")
+    print("#  HOPE YOU HAD FUN!   #")
+    print("########################")
+    time.sleep(1)
+    print("########################")
+    print("#GAME BY:CHASE(9/28/17)#")
+    print("########################")
+    
+    
     
 def get_guess(current_low, current_high):
 
@@ -64,8 +68,11 @@ def play_again():
             print("I don't understand. Please enter 'y' or 'n'.")
 
 def play():
+    set_low_high()
+
     current_low = low
     current_high = high
+    guess = (current_low+current_high) // 2 
     check = -1
     
     pick_number()
