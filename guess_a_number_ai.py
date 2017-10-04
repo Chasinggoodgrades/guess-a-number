@@ -4,6 +4,9 @@
 ##########################
 import random
 import time
+import math
+
+
 
 
 # helper functions
@@ -35,7 +38,7 @@ def show_start_screen():
 def set_low_high():
     low = int(input("Please pick a low for the computer: "))
     high = int(input("Please pick a high for the computer: "))
-    return low, high  
+    return low, high
 
 def show_credits():
     time.sleep(1)
@@ -59,8 +62,8 @@ def pick_number(low, high):
     print("You should pick a number between " + str(low) + " and " + str(high) + ".")
     print("Press any key when you are ready to play.")
     input()
-def check_guess(guess):
-    answer = input("Is your number " + str(guess) + "? (Please use, 'l' 'h' or 'y'")
+def check_guess(guess, tries):
+    answer = input("For attempt # " + str(tries) + " is your number " + str(guess) + "? (Please use, 'l' 'h' or 'y'")
     if answer.lower() == "low" or answer.lower() == "l":
         check = -1
     elif answer.lower() == "high" or answer.lower() == "h":
@@ -88,17 +91,29 @@ def play_again():
         else:
             print("I don't understand. Please enter 'y' or 'n'.")
 
-def play():
+#Settings
 
+
+def play():
     current_low,current_high = set_low_high()
-    guess = (current_low+current_high) // 2 
+    guess = (current_low+current_high) // 2     
     check = -1
+    tries = 1
+ 
+    
+
     
     pick_number(current_low,current_high)
-    
-    while check != 0:
+
+    limit = math.ceil(math.log(current_high-current_low +1, 2))
+
+    while check != 0 and tries < limit:
         guess = get_guess(current_low, current_high)
-        check = check_guess(guess)
+        check = check_guess(guess, tries)
+
+
+        tries += 1
+
 
         if check == -1:
             current_low = guess + 1
