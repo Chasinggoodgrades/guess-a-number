@@ -35,9 +35,14 @@ def show_start_screen():
              __________$$$$$$$$$$$$$$$$$$$$
     """)
 
+
 def set_low_high():
-    low = int(input("Please pick a low for the computer: "))
-    high = int(input("Please pick a high for the computer: "))
+    low = int(input("Hi " + name + " pick a low for the computer: "))
+    #while not low.isdigit():
+        #low = int(input("I don't understand, please pick a number!"))
+    high = int(input("Now pick a high for the computer: "))
+   # while not high.isdigit():
+        #high = int(input("I don't understand, please pick a number!"))
     return low, high
 
 def show_credits():
@@ -63,7 +68,7 @@ def pick_number(low, high):
     print("Press any key when you are ready to play.")
     input()
 def check_guess(guess, tries):
-    answer = input("For attempt # " + str(tries) + " is your number " + str(guess) + "? (Please use, 'l' 'h' or 'y'")
+    answer = input("For attempt # " + str(tries + 1) + " is your number " + str(guess) + "? (Please use, 'l' 'h' or 'y'")
     if answer.lower() == "low" or answer.lower() == "l":
         check = -1
     elif answer.lower() == "high" or answer.lower() == "h":
@@ -72,13 +77,13 @@ def check_guess(guess, tries):
         print("YAYAYAY!")
         check = 0
     else:
-        print("I dont understand, please do (h,l, or y)")
+        print("I dont understand, " + name + " please do (h,l, or y)")
         check = 2
     return check
 
-def show_result(guess):
+def show_result(name):
     print()
-    print("Computer will always win. Sorry lmao")
+    print("Computer will always win. Sorry for your loss " + str(name) + ".")
 
 def play_again():
     while True:
@@ -98,9 +103,7 @@ def play():
     current_low,current_high = set_low_high()
     guess = (current_low+current_high) // 2     
     check = -1
-    tries = 1
- 
-    
+    tries = 0
 
     
     pick_number(current_low,current_high)
@@ -122,12 +125,14 @@ def play():
             current_high = guess - 1
             # adjust current_high
 
-    show_result(guess)
+    show_result(name)
 
 # Game starts running here
 show_start_screen()
 
 playing = True
+
+name = input("What shall I call you today? ")
 
 while playing:
     play()
