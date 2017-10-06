@@ -6,9 +6,6 @@ import random
 import time
 import math
 
-
-
-
 # helper functions
 def show_start_screen():
     print("""             ________________$$$$
@@ -35,13 +32,12 @@ def show_start_screen():
              __________$$$$$$$$$$$$$$$$$$$$
     """)
 
-
 def set_low_high():
     low = int(input("Hi " + name + " pick a low for the computer: "))
     #while not low.isdigit():
         #low = int(input("I don't understand, please pick a number!"))
     high = int(input("Now pick a high for the computer: "))
-   # while not high.isdigit():
+    #while not high.isdigit():
         #high = int(input("I don't understand, please pick a number!"))
     return low, high
 
@@ -54,17 +50,16 @@ def show_credits():
     print("########################")
     print("#GAME BY:CHASE(9/28/17)#")
     print("########################")
-    
-    
-    
+
 def get_guess(current_low, current_high):
 
     guess = (current_high + current_low) //2
     return guess
 
-def pick_number(low, high):
+def pick_number(low, high, limit):
     print()
-    print("You should pick a number between " + str(low) + " and " + str(high) + ".")
+    print("You should think of a number between " + str(low) + " and " + str(high) + ".")
+    print("I will take " + str(limit) + " attempts between " + str(low) + " and " + str(high) + ".")
     print("Press any key when you are ready to play.")
     input()
 def check_guess(guess, tries):
@@ -81,14 +76,14 @@ def check_guess(guess, tries):
         check = 2
     return check
 
-def show_result(name):
-    print()
-    print("Computer will always win. Sorry for your loss " + str(name) + ".")
-
+def show_result(name, check):
+    if check == 0:
+        print("Computer will always win. Sorry for your loss " + str(name) + ".")
+    else:
+        print("Well " + name + " I guess you're smarter than the computer or a cheater.")
 def play_again():
     while True:
         decision = input("Would you like to play again? (y/n) ")
-
         if decision.lower() == 'y' or decision.lower() == 'yes':
             return True
         elif decision.lower() == 'n' or decision.lower() == 'no':
@@ -96,27 +91,21 @@ def play_again():
         else:
             print("I don't understand. Please enter 'y' or 'n'.")
 
-#Settings
-
-
 def play():
     current_low,current_high = set_low_high()
     guess = (current_low+current_high) // 2     
     check = -1
     tries = 0
 
+    limit = math.ceil(math.log(current_high-current_low +1, 2))    
     
-    pick_number(current_low,current_high)
-
-    limit = math.ceil(math.log(current_high-current_low +1, 2))
+    pick_number(current_low,current_high, limit)
 
     while check != 0 and tries < limit:
         guess = get_guess(current_low, current_high)
         check = check_guess(guess, tries)
 
-
         tries += 1
-
 
         if check == -1:
             current_low = guess + 1
@@ -124,8 +113,10 @@ def play():
         elif check == 1:
             current_high = guess - 1
             # adjust current_high
+        elif check == 2:
+            tries -= 1
 
-    show_result(name)
+    show_result(name, check)
 
 # Game starts running here
 show_start_screen()
